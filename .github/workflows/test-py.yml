@@ -1,0 +1,48 @@
+name: test-py
+
+# Reusable workflow. Runs pytest in the calling repo.
+#   jobs:
+#     test:
+#       uses: Cloxy777/platform/.github/workflows/test-py.yml@v0.1.0
+#       with:
+#         python-version: "3.12"
+#         test-path: tests
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        type: string
+        default: "3.12"
+      test-path:
+        type: string
+        default: tests
+      requirements-file:
+        description: "Optional requirements file, relative to repo root. Empty = skip install."
+        type: string
+        default: ""
+      working-directory:
+        type: string
+        default: "."
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Install dependencies
+        if: ${{ inputs.requirements-file != '' }}
+        run: python -m pip install -r "${{ inputs.requirements-file }}"
+      - name: Install pytest
+        run: python -m pip install pytest
+      - name: Run tests
+        run: python -m pytest "${{ inputs.test-path }}" -q

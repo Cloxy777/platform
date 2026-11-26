@@ -1,0 +1,44 @@
+name: deploy-worker
+
+# Reusable workflow. Deploys a Cloudflare Worker with wrangler.
+# Caller must pass the secret CLOUDFLARE_API_TOKEN.
+#   jobs:
+#     deploy:
+#       uses: Cloxy777/platform/.github/workflows/deploy-worker.yml@v0.1.0
+#       with:
+#         working-directory: webhook
+#       secrets:
+#         CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        type: string
+        default: "."
+      node-version:
+        type: string
+        default: "22"
+    secrets:
+      CLOUDFLARE_API_TOKEN:
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - run: npm ci
+      - name: Deploy to Cloudflare
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
