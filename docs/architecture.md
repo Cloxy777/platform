@@ -150,7 +150,7 @@ Claude global assets (3.4), synced at `v0.2.0` with CI job `claude-sync`: `ua-ca
 
 | Consumer | CI | Telegram |
 |---|---|---|
-| `ua-carry-trade` | `ci.yml` -> `test-py.yml@v0.1.0` (`tests`, `requirements.txt`) | `tools/daily_reminder.py` `send()` calls `platform_notify.send_message`; `tools/healthcheck.py` uses `platform_notify.health` (pin `py-v0.3.0`, daily OK heartbeat); Actions jobs `pip install -r requirements.txt` (git-tag pin) |
+| `ua-carry-trade` | `ci.yml` -> `test-py.yml@v0.1.0` (`tests`, `requirements.txt`) | `tools/daily_reminder.py` `send()` calls `platform_notify.send_message`; `worker/` is the `carry` domain Worker for the gateway (golden-file parity with the Python date logic, `deploy-worker` workflow); `tools/healthcheck.py` uses `platform_notify.health` (pin `py-v0.3.0`, daily OK heartbeat); Actions jobs `pip install -r requirements.txt` (git-tag pin) |
 | `automation-framework` | `ci.yml`: `test-node.yml` for `webhook/`, `test-py.yml` for `tests/` | Worker: vendored `webhook/src/vendor/telegram-kit.js`; Python: `scripts/notify_telegram.py` is a shim over `platform_notify` (keeps `send_message(text, reply_markup=None)` and HTML mode) |
 | `template-domain` | `ci.yml` -> `test-node.yml@v0.2.0`, `check-claude-sync.yml@v0.2.0`; `deploy.yml` -> `deploy-worker.yml@v0.2.0` | GitHub template for a domain Worker (docs/contract.md); vendors `registry.js` from `telegram-kit-v0.2.0` |
 | `life-gateway` | `ci.yml` -> `test-node.yml@v0.2.0`, `check-claude-sync.yml@v0.2.0`; `deploy.yml` -> `deploy-worker.yml@v0.2.0` | Telegram gateway Worker (design 2); vendors `telegram-kit.js` (v0.1.0) and `registry.js` (v0.2.0); registry only in the `REGISTRY` secret |
