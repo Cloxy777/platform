@@ -54,8 +54,7 @@ here.
 ### P3 - the original goal: flexible bots and integrations (design section 2, 4)
 
 9. DONE (`telegram-kit-v0.2.0`): `docs/contract.md` + `packages/telegram-kit/src/registry.js` validators with tests.
-10. `template-domain` as a separate GitHub *template* repo (Worker skeleton,
-    `/manifest`, CI via the reusable workflows, `CLAUDE.md` stub).
+10. DONE: `Cloxy777/template-domain` (private GitHub template repo): Worker skeleton with `/manifest`, `/report`, `/command`, `/action`, vendored `registry.js` (telegram-kit-v0.2.0), contract tests, CI via `test-node` and `check-claude-sync` at v0.2.0, manual `deploy` workflow, `CLAUDE.md` stub. Initial commit went straight to `main` (empty repo); later changes via PR.
 11. `life-gateway` Worker: multi-bot at `/bot/<name>`, per-domain ACL, registry
     from private config, one cron fan-out digest. Pilot domain: the carry
     reminders (keep the Actions reminder running in parallel for a week).

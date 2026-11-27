@@ -152,6 +152,7 @@ Claude global assets (3.4), synced at `v0.2.0` with CI job `claude-sync`: `ua-ca
 |---|---|---|
 | `ua-carry-trade` | `ci.yml` -> `test-py.yml@v0.1.0` (`tests`, `requirements.txt`) | `tools/daily_reminder.py` `send()` calls `platform_notify.send_message`; `tools/healthcheck.py` uses `platform_notify.health` (pin `py-v0.3.0`, daily OK heartbeat); Actions jobs `pip install -r requirements.txt` (git-tag pin) |
 | `automation-framework` | `ci.yml`: `test-node.yml` for `webhook/`, `test-py.yml` for `tests/` | Worker: vendored `webhook/src/vendor/telegram-kit.js`; Python: `scripts/notify_telegram.py` is a shim over `platform_notify` (keeps `send_message(text, reply_markup=None)` and HTML mode) |
+| `template-domain` | `ci.yml` -> `test-node.yml@v0.2.0`, `check-claude-sync.yml@v0.2.0`; `deploy.yml` -> `deploy-worker.yml@v0.2.0` | GitHub template for a domain Worker (docs/contract.md); vendors `registry.js` from `telegram-kit-v0.2.0` |
 | `investment-framework` | `ci.yml` -> `test-py.yml@v0.1.0` (`scripts/tests`, `scripts/requirements.txt`) | Routine/command text sends via `python -m platform_notify message|document` (pin `py-v0.2.0`); `scripts/healthcheck.py` builds results/JSON/exit code via `platform_notify.health` (pin `py-v0.3.0`; silent-when-ok stays in the command layer); `check_telegram_bot` uses `platform_notify.get_me` (test seam `fetch(url)->str` kept) |
 
 Pinning styles in use:
