@@ -29,7 +29,7 @@ here.
 3. **Use `deploy-worker.yml`** from `automation-framework` in place of its own
    `deploy-webhook.yml` (proves the third reusable workflow). Acceptance: deploy
    runs via the reusable workflow; same result.
-4. **Replace the remaining curl-based Telegram sends** in Routine prompts and
+4. (In progress: `py-v0.2.0` adds the CLI; investment snippets to follow.) **Replace the remaining curl-based Telegram sends** in Routine prompts and
    slash commands with a repo script using `platform_notify` (still re-pasting
    prompts in claude.ai). Acceptance: no raw `curl ...sendMessage` left.
 5. **Unify the two healthchecks** (design 4.3).
