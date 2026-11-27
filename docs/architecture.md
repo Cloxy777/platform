@@ -131,7 +131,7 @@ new tag. The consumer `CLAUDE.md` keeps only domain rules above the block.
 
 ## 4. How consumers use it
 
-Claude global assets (3.4): `ua-carry-trade` is synced at `v0.2.0` (PR #59, CI job `claude-sync`). Others not yet.
+Claude global assets (3.4), synced at `v0.2.0` with CI job `claude-sync`: `ua-carry-trade` (#59, pilot), `investment-framework` (#999), `automation-framework` (#115). Not yet: `life-*`, dormant repos.
 
 | Consumer | CI | Telegram |
 |---|---|---|
