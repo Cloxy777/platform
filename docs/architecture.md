@@ -34,7 +34,8 @@ workflows and public git dependencies need no credentials).
 | `investment-framework` | private | quality-value investing, runs as Claude Code Routines + slash commands | CI (`test-py`), Telegram `getMe` probe (`platform_notify`) |
 | `automation-framework` | private | municipal sports-court booking (Playwright on Actions) + Telegram bot on a Cloudflare Worker | CI (`test-node`, `test-py`), Worker uses vendored `telegram-kit`, Python sender uses `platform_notify` |
 | `ua-carry-trade` | private | credit carry-trade tracker, daily reminders | CI (`test-py`), Telegram sender via `platform_notify` |
-| `life-sport`, `life-health`, `life-car`, `life-context` | private | personal records | nothing yet |
+| `life-sport`, `life-health`, `life-car` | private | personal records | status-only domain Worker (`worker/`, `telegram-kit/status-domain`), `context/` mirror via `context-sync` (`v0.3.0`), CI: `worker-tests`, `context-sync` |
+| `life-context` | private | shared substrate (profile, restrictions, conventions) | canonical source of the `context/` mirrors; edited only in local sessions |
 | `trading-framework`, `career-hub` | private | dormant / static | nothing yet |
 | `game-scripts` | private | AutoHotkey save backups | nothing |
 
