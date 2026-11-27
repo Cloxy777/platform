@@ -164,12 +164,75 @@ Enforcement reality: rules in markdown are advisory. Anything that must never
 happen (placing broker orders, leaking secrets, merging without consent) needs
 a hook or a permission rule in the plugin's settings, plus a test.
 
-### 3.3 Fallback if plugins are unavailable in Routines [unverified]
+### 3.3 Plugin and Routine support: verified 2026-11-27
 
-A release workflow in `platform` renders the rules into a generated file
-(`.claude/rules/platform-<name>.md`, header "GENERATED from platform@<tag>, do
-not edit") and opens a PR in each consumer. Same single source of truth, no
-runtime dependency.
+Source: current Claude Code docs under https://code.claude.com/docs/en/
+(`plugins/manifest-reference`, `plugins/components`, `plugins/marketplace-reference`,
+`plugins/install`, `plugins/loading`, `cloud-environments`, `settings`,
+`permissions`, `hooks`, `routines`). Read by a docs-check agent, not yet proven
+by a live test. Items marked [test] need an empirical check before we rely on them.
+
+**Schema (documented)**
+- `.claude-plugin/plugin.json`: only `name` required. Components by default
+  location: `skills/<n>/SKILL.md`, `commands/`, `agents/`, `hooks/hooks.json`,
+  `.mcp.json`, `bin/`, output styles, workflows.
+- `.claude-plugin/marketplace.json`: `name`, `owner.name`, `plugins[]`; each entry
+  needs `name` and `source`. Sources: relative path, `github`, `url`, `git-subdir`,
+  `npm`, `archive`, `command`. Pin with `ref` (tag/branch) and `sha` (40 chars).
+- Repo enables a plugin in committed `.claude/settings.json`:
+  `extraKnownMarketplaces: {<mkt>: {source: {source: "github", repo: "<owner>/<repo>"}}}`
+  and `enabledPlugins: {"<plugin>@<mkt>": true}`.
+- A marketplace in a repo subfolder needs a `path` in the marketplace source
+  (unverified for relative plugin sources) [test].
+
+**Consequences for our design**
+1. **A plugin cannot ship always-on rules.** There is no rules component, and a
+   `CLAUDE.md` at the plugin root is not loaded (validate warns). Rules in a
+   plugin only load as skills (on demand, by description match) or via a hook
+   that injects context. The "plugin with a `rules/` dir" in 3.2 does not work as
+   drawn. Advisory rules must reach each repo as repo files.
+2. **Cloud sessions do not add repo-declared marketplaces** in Anthropic-hosted
+   environments (needs the trust dialog, which cloud does not show). Plugins
+   enabled only in repo settings are therefore not expected to load there. The
+   documented route is plugins synced from the owner's claude.ai account.
+3. **Routines: undocumented.** The docs say a run clones the selected repos and
+   starts in auto mode; they do not say whether plugins, skills, hooks,
+   `.claude/settings.json` or `CLAUDE.md` load. Cloud-session rules suggest
+   `CLAUDE.md`, `.claude/agents`, committed `.claude/settings.json` (project
+   hooks, deny/ask rules) are present, plugins are not [test].
+4. **Hooks and deny rules**: `PreToolUse` can deny (JSON `permissionDecision:
+   "deny"` or exit 2) and a deny stays a deny even if another hook allows.
+   Hook events fire in cloud sessions. Project `deny` and `ask` permission rules
+   apply without trust. Plugins have no documented way to ship permission rules.
+   Timeouts fail open unless `onFailure: "block"` (v2.1.295+).
+   Hook execution inside a Routine is not documented [test].
+
+**Decision (proposed, see decisions.md when accepted)**
+Do not depend on plugin loading for anything that must hold in cloud or
+Routines. Use the fallback below as the primary mechanism:
+
+- `platform` holds the single source: `rules/*.md`, `hooks/*` (scripts), and
+  `settings.fragment.json` (deny/ask rules and hook wiring).
+- A release workflow in `platform` renders them into each consumer as committed
+  files: `.claude/rules/platform-<name>.md` (header "GENERATED from
+  platform@<tag>, do not edit"), `.claude/hooks/platform-*`, and a merged block in
+  `.claude/settings.json`; it opens a PR per consumer. The consumer `CLAUDE.md`
+  imports the rules (`@.claude/rules/platform-*.md`) [test import syntax] and
+  keeps only domain rules.
+- Committed files travel with the clone, so they work locally, in cloud sessions
+  and (per test) in Routines. Hooks and deny rules there are the enforcement for
+  the must-never list (no broker orders, no secret printing, no merge without yes).
+- A real plugin stays optional, for local interactive use only (skills such as
+  the review agent), installed per machine. It is never a dependency.
+
+**Tests to run before building (P2 step 7)**
+- T1: in a throwaway private repo, commit a `PreToolUse` deny hook and a
+  `CLAUDE.md` rule; run a Routine on it; confirm the rule is in context and the
+  hook blocks. (Creates a test Routine: needs the owner's yes.)
+- T2: same repo in a cloud session with a repo-declared marketplace: confirm
+  the plugin does not load.
+- T3: `@` import of a generated rules file from `CLAUDE.md` in cloud.
+- T4: marketplace in a subfolder with relative plugin source.
 
 ### 3.4 System prompts
 
