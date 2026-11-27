@@ -238,7 +238,10 @@ Routines. Use the fallback below as the primary mechanism:
   hook blocks. (Creates a test Routine: needs the owner's yes.)
 - T2: same repo in a cloud session with a repo-declared marketplace: confirm
   the plugin does not load.
-- T3: `@` import of a generated rules file from `CLAUDE.md` in cloud.
+- T3: **PASSED 2026-11-27.** In a Routine run, a committed `CLAUDE.md` line
+  `@.claude/rules/platform-test.md` pulled the generated rules file into context
+  (canary visible without any file read). So the generated-files design can use
+  one `@` import line per rule. Original test text: `@` import of a generated rules file from `CLAUDE.md` in cloud.
 - T4: marketplace in a subfolder with relative plugin source.
 
 ### 3.4 System prompts
