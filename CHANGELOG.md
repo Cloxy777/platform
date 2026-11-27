@@ -9,7 +9,10 @@ dated heading named after the tag.
 ## Unreleased
 
 - Add CHANGELOG and a CI check that released paths come with a changelog line.
-- py (next tag `py-v0.2.0`): add `send_document` (multipart) and a CLI
+
+## py-v0.2.0 - 2026-11-27 (stream `py-v*`)
+
+- Add `send_document` (multipart) and a CLI
   `python -m platform_notify message|document|get-me` to replace curl snippets.
 
 ## v0.2.0 - 2026-11-27 (stream `v*`)
