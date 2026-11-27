@@ -8,8 +8,11 @@ dated heading named after the tag.
 
 ## Unreleased
 
-- Add `telegram-kit/registry` (validateRegistry, validateManifest, validateReport, validateCommandResult) and docs/contract.md (telegram-kit stream).
 - Add CHANGELOG and a CI check that released paths come with a changelog line.
+
+## telegram-kit-v0.2.0 - 2026-11-27 (stream `telegram-kit-v*`)
+
+- Add `telegram-kit/registry` (validateRegistry, validateManifest, validateReport, validateCommandResult) and docs/contract.md.
 
 ## py-v0.3.0 - 2026-11-27 (stream `py-v*`)
 
