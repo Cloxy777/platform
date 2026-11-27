@@ -25,6 +25,11 @@ jobs:
     with:
       working-directory: context-sync
       test-path: tests
+  routines:
+    uses: ./.github/workflows/test-py.yml
+    with:
+      working-directory: routines
+      test-path: tests
   scripts:
     uses: ./.github/workflows/test-py.yml
     with:

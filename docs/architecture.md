@@ -130,6 +130,10 @@ Exit codes: 0 sent or skipped (unset secrets), 1 Telegram failure, 2 usage.
 
 `context-sync/sync.py` mirrors selected `life-context` files into a consumer's `context/` (banner, pinned source commit, `MANIFEST.json` hashes) so cloud sessions can read them (decision D14). `check-context-sync.yml` (inputs: `platform-ref`) fails on hand edits or unlisted files; local `--check --source ../life-context` also reports a mirror that is behind. Cloud sessions never write `context/`.
 
+### 3.6 `routines` (Unreleased)
+
+`routines/routine_drift.py` keeps Routine definitions in git (design 4.2). A session saves the `RemoteTrigger list` JSON to a file; `snapshot` writes `routines.json` plus `prompts/<slug>.md` into the repo that owns the Routines (investment-framework for Routines 1-8), `check` exits 1 on drift in name, cron, enabled, environment, repos, connectors or prompt hash and on live Routines not in git (`--ignore <id>` for other repos' ones). Offline, stdlib only, never prints prompt text. Fixing drift stays a manual, owner-approved API update. Integration registry template: `docs/integration-registry.md`.
+
 ### 3.4 `claude-global` (not tagged yet; first use is the carry pilot)
 
 Single source of the global Claude layer (design.md section 3, decisions D13):
