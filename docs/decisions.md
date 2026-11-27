@@ -100,6 +100,6 @@ by a platform tag and checked by `check-claude-sync.yml`. This supersedes the
 Consequences: global edits reach a repo only through a sync PR (that is the
 review point); the guard hook enforces only the must-never rules, everything
 else is advisory text. Merge consent stays a rule, not a hook, so Routine 2's
-own squash-merge keeps working. Hook execution in Routines is verified for a
-relative command path; the shipped command uses `$CLAUDE_PROJECT_DIR`, to be
-confirmed in the carry pilot.
+own squash-merge keeps working. Verified 2026-11-27 in a Routine on `ua-carry-trade` (pilot, v0.2.0): the
+shipped command with `$CLAUDE_PROJECT_DIR` ran, blocked `echo $<SECRET_VAR>`,
+allowed a harmless command, and the generated rule was in context.

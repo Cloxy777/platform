@@ -43,8 +43,12 @@ here.
 7. DONE in PR (T1, T3 passed; T2, T4 skipped as moot): `claude-global/` with
    rules, guard hook, settings fragment, `sync.py`, 49 tests, and
    `check-claude-sync.yml` (architecture 3.4, decisions D13). Not tagged yet.
-8. Tag a release, run sync in one pilot repo (carry), confirm a fresh session shows the rules,
-   then roll out to the rest. Slim each repo's `CLAUDE.md` to domain-only.
+8. Pilot DONE 2026-11-27: `v0.2.0` tagged, synced into `ua-carry-trade` (#59),
+   Routine confirmed rules in context and hook firing. TODO: roll out to
+   `investment-framework` (note: its Routine 2 merges its own PR, which the
+   guard allows; run a Routine afterwards), `automation-framework`, then the
+   life-* repos. Slimming each repo's `CLAUDE.md` to domain-only is optional
+   and left to the owner.
 
 ### P3 - the original goal: flexible bots and integrations (design section 2, 4)
 
