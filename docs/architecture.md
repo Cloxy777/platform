@@ -97,6 +97,8 @@ ES module, no dependencies, uses only Web APIs (`fetch`, `crypto.subtle`,
 yet** (they exist for the future confirm-before-execute callback flow, see
 design.md).
 
+Subpath `@cloxy777/telegram-kit/registry` (unreleased, planned `telegram-kit-v0.2.0`; not part of the vendored single-file kit): `validateRegistry`, `validateManifest`, `validateReport(r, {privacy})`, `validateCommandResult`. Each returns a list of error strings (empty = valid). Spec in `docs/contract.md`.
+
 ### 3.3 `py/platform_notify` (tags `py-v0.1.0`; `py-v0.2.0` adds `send_document` and the CLI; `py-v0.3.0` adds `get_chat` and `health`)
 
 Stdlib only. `send_message(text, *, token=None, chat_id=None, parse_mode=None,

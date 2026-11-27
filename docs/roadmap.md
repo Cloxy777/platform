@@ -53,8 +53,7 @@ here.
 
 ### P3 - the original goal: flexible bots and integrations (design section 2, 4)
 
-9. Write `docs/contract.md` (domain contract) and the registry schema as code
-   with validation tests.
+9. DONE (pending release tag): `docs/contract.md` + `packages/telegram-kit/src/registry.js` validators with tests. Next: tag `telegram-kit-v0.2.0` after merge.
 10. `template-domain` as a separate GitHub *template* repo (Worker skeleton,
     `/manifest`, CI via the reusable workflows, `CLAUDE.md` stub).
 11. `life-gateway` Worker: multi-bot at `/bot/<name>`, per-domain ACL, registry
