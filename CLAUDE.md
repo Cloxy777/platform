@@ -17,6 +17,7 @@ Working rules:
 - `claude-global/` is stdlib-only Python; edit rules/hooks there, never in a consumer's generated `platform-*` files. Guard hook changes need a test in `claude-global/tests`.
 - Keep `packages/telegram-kit` dependency-free and `py/platform_notify`
   stdlib-only. Error messages must never contain a token.
+- A PR that changes a released path (workflows, `claude-global`, kit `src`, `py/platform_notify`) adds a line under Unreleased in `CHANGELOG.md`; CI enforces it.
 - Tests must be offline (inject `fetchImpl` / `opener`).
 - After a change that affects consumers, update `docs/architecture.md` (section 4)
   and add to `docs/decisions.md` if a choice was made.

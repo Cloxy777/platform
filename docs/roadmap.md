@@ -24,8 +24,8 @@ here.
 
 1. **Install the Renovate GitHub app** on `platform` consumers so tag bumps
    (workflows, pip pin) arrive as PRs. Acceptance: a test bump PR appears.
-2. **Release hygiene**: add a `CHANGELOG.md` and a release checklist test (CI
-   fails if a tag-worthy path changed without a version note).
+2. DONE (PR in review): `CHANGELOG.md` plus `scripts/check_changelog.py`, run in
+   CI on pull requests (fails if a released path changed without a changelog line).
 3. **Use `deploy-worker.yml`** from `automation-framework` in place of its own
    `deploy-webhook.yml` (proves the third reusable workflow). Acceptance: deploy
    runs via the reusable workflow; same result.

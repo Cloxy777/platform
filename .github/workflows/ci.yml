@@ -20,3 +20,21 @@ jobs:
     with:
       working-directory: claude-global
       test-path: tests
+  scripts:
+    uses: ./.github/workflows/test-py.yml
+    with:
+      working-directory: scripts
+      test-path: tests
+  changelog:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Released paths need a changelog line
+        run: python scripts/check_changelog.py "origin/${{ github.base_ref }}"
