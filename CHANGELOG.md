@@ -8,8 +8,11 @@ dated heading named after the tag.
 
 ## Unreleased
 
-- Add `platform_notify.health` (Result, render_text/json, silent_when_ok policy, shared Telegram probe) and `get_chat` (py-v0.3.0).
 - Add CHANGELOG and a CI check that released paths come with a changelog line.
+
+## py-v0.3.0 - 2026-11-27 (stream `py-v*`)
+
+- Add `platform_notify.health` (Result, render_text/json, silent_when_ok policy, shared Telegram probe) and `get_chat`.
 
 ## py-v0.2.0 - 2026-11-27 (stream `py-v*`)
 
