@@ -55,9 +55,7 @@ here.
 
 9. DONE (`telegram-kit-v0.2.0`): `docs/contract.md` + `packages/telegram-kit/src/registry.js` validators with tests.
 10. DONE: `Cloxy777/template-domain` (private GitHub template repo): Worker skeleton with `/manifest`, `/report`, `/command`, `/action`, vendored `registry.js` (telegram-kit-v0.2.0), contract tests, CI via `test-node` and `check-claude-sync` at v0.2.0, manual `deploy` workflow, `CLAUDE.md` stub. Initial commit went straight to `main` (empty repo); later changes via PR.
-11. `life-gateway` Worker: multi-bot at `/bot/<name>`, per-domain ACL, registry
-    from private config, one cron fan-out digest. Pilot domain: the carry
-    reminders (keep the Actions reminder running in parallel for a week).
+11. PARTIAL: `Cloxy777/life-gateway` (private) core built (PR #1 open): multi-bot `/bot/<name>`, registry from `REGISTRY` secret, ACL, command allowlist, signed single-use owner-only confirms, digest cron, 17 offline tests. Service-binding transport only. Left: owner config (secrets, KV, bindings, `setWebhook`), pilot domain (carry reminders, keep the Actions reminder in parallel for a week), `https` transport if needed.
 12. `invest-bot` Worker: owner-only, status and read-only reports, confirm flow
     for non-broker actions. Aggregates only, no account ids or positions.
 13. Roll domains out: health (status-only schema with a lint test), sport, car;
