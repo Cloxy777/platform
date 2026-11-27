@@ -131,7 +131,7 @@ new tag. The consumer `CLAUDE.md` keeps only domain rules above the block.
 
 ## 4. How consumers use it
 
-Claude global assets (3.4), synced at `v0.2.0` with CI job `claude-sync`: `ua-carry-trade` (#59, pilot), `investment-framework` (#999), `automation-framework` (#115). Not yet: `life-*`, dormant repos.
+Claude global assets (3.4), synced at `v0.2.0` with CI job `claude-sync`: `ua-carry-trade` (#59, pilot), `investment-framework` (#999), `automation-framework` (#115), `life-sport` (#14), `life-health` (#1), `life-car` (#3), `life-context` (#1). The three AGENTS.md-only life repos got a `CLAUDE.md` that imports `@AGENTS.md` plus the platform block. Not yet: dormant repos (`trading-framework`, `career-hub`, `game-scripts`).
 
 | Consumer | CI | Telegram |
 |---|---|---|

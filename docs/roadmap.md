@@ -46,7 +46,9 @@ here.
 8. Pilot DONE 2026-11-27: `v0.2.0` tagged, synced into `ua-carry-trade` (#59),
    Routine confirmed rules in context and hook firing. Rolled out to
    `investment-framework` (#999; Routine 7 run showed no guard blocks) and
-   `automation-framework` (#115). TODO: the life-* repos. Slimming each repo's `CLAUDE.md` to domain-only is optional
+   `automation-framework` (#115). The four life-* repos are synced too
+   (life-sport #14, life-health #1, life-car #3, life-context #1). Remaining:
+   dormant repos only. Slimming each repo's `CLAUDE.md` to domain-only is optional
    and left to the owner.
 
 ### P3 - the original goal: flexible bots and integrations (design section 2, 4)
