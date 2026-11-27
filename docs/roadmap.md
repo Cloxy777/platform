@@ -32,7 +32,7 @@ here.
 4. Repo side DONE: `py-v0.2.0` adds `send_document` + CLI; investment snippets replaced (#1001). Owner steps left: re-paste Routine prompts, refresh the Routine environment, verify one real send. **Replace the remaining curl-based Telegram sends** in Routine prompts and
    slash commands with a repo script using `platform_notify` (still re-pasting
    prompts in claude.ai). Acceptance: no raw `curl ...sendMessage` left.
-5. **Unify the two healthchecks** (design 4.3).
+5. DONE: `py-v0.3.0` adds `platform_notify.health` + `get_chat`; carry (ua-carry-trade #60) and investment (#1002) healthchecks migrated parity-first (existing tests unchanged). Each repo keeps its own probes; shared: result model, rendering, exit code, `silent_when_ok` policy, Telegram probe.
 
 ### P2 - the original goal: global vs local Claude assets (design section 3)
 
