@@ -99,7 +99,7 @@ design.md).
 
 Subpath `@cloxy777/telegram-kit/registry` (`telegram-kit-v0.2.0`; not part of the vendored single-file kit): `validateRegistry`, `validateManifest`, `validateReport(r, {privacy})`, `validateCommandResult`. Each returns a list of error strings (empty = valid). Spec in `docs/contract.md`.
 
-Subpath `@cloxy777/telegram-kit/status-domain` (planned `telegram-kit-v0.3.0`; vendor as a single file like `registry.js`): `validateStatus`, `summarize`, `dueLines`, `createStatusDomain({name, version, privacy, status})`. Status-only domains (health, sport, car) ship a `worker/status.json` (`as_of`, optional `max_age_days`, `counters`, `due` dates; nothing else) that the repo's CI lints; the Worker serves `/manifest`, `/report`, `/command` (`status`, `due`) and a no-op `/action` from it. Lint messages never echo values. See decision D15.
+Subpath `@cloxy777/telegram-kit/status-domain` (`telegram-kit-v0.3.0`; vendor as a single file like `registry.js`): `validateStatus`, `summarize`, `dueLines`, `createStatusDomain({name, version, privacy, status})`. Status-only domains (health, sport, car) ship a `worker/status.json` (`as_of`, optional `max_age_days`, `counters`, `due` dates; nothing else) that the repo's CI lints; the Worker serves `/manifest`, `/report`, `/command` (`status`, `due`) and a no-op `/action` from it. Lint messages never echo values. See decision D15.
 
 ### 3.3 `py/platform_notify` (tags `py-v0.1.0`; `py-v0.2.0` adds `send_document` and the CLI; `py-v0.3.0` adds `get_chat` and `health`)
 
@@ -125,7 +125,7 @@ python -m platform_notify get-me
 ```
 Exit codes: 0 sent or skipped (unset secrets), 1 Telegram failure, 2 usage.
 
-### 3.5 `context-sync` (planned `v0.3.0`)
+### 3.5 `context-sync` (`v0.3.0`)
 
 `context-sync/sync.py` mirrors selected `life-context` files into a consumer's `context/` (banner, pinned source commit, `MANIFEST.json` hashes) so cloud sessions can read them (decision D14). `check-context-sync.yml` (inputs: `platform-ref`) fails on hand edits or unlisted files; local `--check --source ../life-context` also reports a mirror that is behind. Cloud sessions never write `context/`.
 
