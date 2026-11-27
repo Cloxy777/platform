@@ -26,10 +26,10 @@ here.
    (workflows, pip pin) arrive as PRs. Acceptance: a test bump PR appears.
 2. DONE (PR in review): `CHANGELOG.md` plus `scripts/check_changelog.py`, run in
    CI on pull requests (fails if a released path changed without a changelog line).
-3. **Use `deploy-worker.yml`** from `automation-framework` in place of its own
+3. DONE 2026-11-27 (automation #116, manual deploy run green). **Use `deploy-worker.yml`** from `automation-framework` in place of its own
    `deploy-webhook.yml` (proves the third reusable workflow). Acceptance: deploy
    runs via the reusable workflow; same result.
-4. (In progress: `py-v0.2.0` adds the CLI; investment snippets to follow.) **Replace the remaining curl-based Telegram sends** in Routine prompts and
+4. Repo side DONE: `py-v0.2.0` adds `send_document` + CLI; investment snippets replaced (#1001). Owner steps left: re-paste Routine prompts, refresh the Routine environment, verify one real send. **Replace the remaining curl-based Telegram sends** in Routine prompts and
    slash commands with a repo script using `platform_notify` (still re-pasting
    prompts in claude.ai). Acceptance: no raw `curl ...sendMessage` left.
 5. **Unify the two healthchecks** (design 4.3).
