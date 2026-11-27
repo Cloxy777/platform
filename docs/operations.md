@@ -5,11 +5,15 @@
 1. Branch `claude/<topic>` from `main`, change, run the suites locally:
    - Python: `cd py && python -m pytest tests -q`
    - JS: `cd packages/telegram-kit && npm test`
+   - Claude assets: `python -m pytest claude-global/tests -q`; scripts: `python -m pytest scripts/tests -q`
+   - If a released path changed, add a line under `## Unreleased` in `CHANGELOG.md`
+     (`python scripts/check_changelog.py origin/main` shows what CI will say).
 2. Open a PR. `ci.yml` runs both suites through the repo's own reusable
    workflows. Merge with `gh pr merge <n> --squash --delete-branch` after the
    owner says yes.
-3. Tag only the thing that changed, from `main`:
-   - workflows: `v<major>.<minor>.<patch>`
+3. Tag only the thing that changed, from `main` (and move the Unreleased lines in
+   `CHANGELOG.md` under a heading for the tag, in the same or the next PR):
+   - workflows and `claude-global`: `v<major>.<minor>.<patch>`
    - JS kit: `telegram-kit-v<...>`; Python: `py-v<...>`
    - `git tag <name> && git push origin <name>`. Never move or delete a pushed tag;
      cut a new one.
