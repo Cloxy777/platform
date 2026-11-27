@@ -8,6 +8,8 @@ dated heading named after the tag.
 
 ## Unreleased
 
+## v0.4.0 - 2026-11-27 (stream `v*`)
+
 - Add `routines/routine_drift.py`: snapshot live Routine definitions into git and report drift (fields and prompt hash, never prompt text).
 - Add CHANGELOG and a CI check that released paths come with a changelog line.
 
