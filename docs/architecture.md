@@ -97,7 +97,7 @@ ES module, no dependencies, uses only Web APIs (`fetch`, `crypto.subtle`,
 yet** (they exist for the future confirm-before-execute callback flow, see
 design.md).
 
-### 3.3 `py/platform_notify` (tags `py-v0.1.0`; `py-v0.2.0` adds `send_document` and the CLI)
+### 3.3 `py/platform_notify` (tags `py-v0.1.0`; `py-v0.2.0` adds `send_document` and the CLI; `py-v0.3.0` adds `get_chat` and `health`)
 
 Stdlib only. `send_message(text, *, token=None, chat_id=None, parse_mode=None,
 reply_markup=None, timeout=15, opener=urlopen) -> bool`. Reads
@@ -111,6 +111,8 @@ redacted). `opener` is injectable for tests.
 From `py-v0.2.0`: `send_document(path, *, caption=None, token=None,
 chat_id=None, parse_mode=None, timeout=30, opener=urlopen) -> bool` (multipart,
 same skip/raise rules), and a CLI so Routines and slash commands need no curl:
+
+From `py-v0.3.0`: `get_chat(chat_id, *, token=None)` and `platform_notify.health`: `Result(name, status, detail)` with `PASS/WARN/FAIL` (`from_passed`, `.passed`, `.to_dict()` -> `{check, passed, detail}`), `render_text(results, prefix, suffix, ok_footer, fail_footer)`, `render_json`, `exit_code` (1 on any FAIL), `should_report(results, silent_when_ok=)` and `probe_telegram(token, chat=None, require_chat=False)`. Each repo keeps its own probes and picks the policy: `silent_when_ok=False` = daily OK heartbeat, `True` = report only on failure.
 
 ```
 python -m platform_notify message --text "..." [--parse-mode Markdown]   # or --text - (stdin) / --text-file F

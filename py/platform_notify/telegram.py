@@ -124,6 +124,15 @@ def send_document(
     return True
 
 
+def get_chat(chat_id, *, token=None, timeout=15, opener=urllib.request.urlopen):
+    """Check that a chat is reachable by the bot. Returns the 'result' dict,
+    raises TelegramError."""
+    token = token or os.environ.get("TELEGRAM_BOT_TOKEN")
+    if not token:
+        raise TelegramError("getChat failed: token not set")
+    return _call("getChat", {"chat_id": chat_id}, token, timeout, opener)["result"]
+
+
 def get_me(*, token=None, timeout=15, opener=urllib.request.urlopen):
     """Validate the token. Returns the bot's 'result' dict, raises TelegramError."""
     token = token or os.environ.get("TELEGRAM_BOT_TOKEN")
