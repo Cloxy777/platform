@@ -14,6 +14,7 @@ Working rules:
   (`gh pr merge <n> --squash --delete-branch`). Never auto-merge.
 - Tag only what changed: `v*` (workflows), `telegram-kit-v*`, `py-v*`. Never move
   or delete a pushed tag.
+- `claude-global/` is stdlib-only Python; edit rules/hooks there, never in a consumer's generated `platform-*` files. Guard hook changes need a test in `claude-global/tests`.
 - Keep `packages/telegram-kit` dependency-free and `py/platform_notify`
   stdlib-only. Error messages must never contain a token.
 - Tests must be offline (inject `fetchImpl` / `opener`).

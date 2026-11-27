@@ -15,3 +15,8 @@ jobs:
     uses: ./.github/workflows/test-node.yml
     with:
       working-directory: packages/telegram-kit
+  claude-global:
+    uses: ./.github/workflows/test-py.yml
+    with:
+      working-directory: claude-global
+      test-path: tests
