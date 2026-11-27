@@ -131,6 +131,8 @@ new tag. The consumer `CLAUDE.md` keeps only domain rules above the block.
 
 ## 4. How consumers use it
 
+Claude global assets (3.4): `ua-carry-trade` is synced at `v0.2.0` (PR #59, CI job `claude-sync`). Others not yet.
+
 | Consumer | CI | Telegram |
 |---|---|---|
 | `ua-carry-trade` | `ci.yml` -> `test-py.yml@v0.1.0` (`tests`, `requirements.txt`) | `tools/daily_reminder.py` `send()` calls `platform_notify.send_message`; Actions jobs `pip install -r requirements.txt` (git-tag pin) |
