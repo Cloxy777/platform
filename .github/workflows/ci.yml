@@ -1,0 +1,17 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  py:
+    uses: ./.github/workflows/test-py.yml
+    with:
+      working-directory: py
+      test-path: tests
+  telegram-kit:
+    uses: ./.github/workflows/test-node.yml
+    with:
+      working-directory: packages/telegram-kit

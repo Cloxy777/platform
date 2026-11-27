@@ -1,0 +1,10 @@
+{
+  "name": "@cloxy777/telegram-kit",
+  "version": "0.1.0",
+  "description": "Zero-dependency Telegram webhook helpers for Cloudflare Workers",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "private": true,
+  "scripts": { "test": "node --test" }
+}
