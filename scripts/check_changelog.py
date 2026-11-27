@@ -12,6 +12,7 @@ import sys
 STREAMS = [
     ("v*", (".github/workflows/test-py.yml", ".github/workflows/test-node.yml",
             ".github/workflows/deploy-worker.yml", ".github/workflows/check-claude-sync.yml",
+            ".github/workflows/check-context-sync.yml", "context-sync/sync.py",
             "claude-global/rules/", "claude-global/hooks/", "claude-global/settings.fragment.json",
             "claude-global/sync.py")),
     ("telegram-kit-v*", ("packages/telegram-kit/src/",)),

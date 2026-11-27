@@ -20,6 +20,11 @@ jobs:
     with:
       working-directory: claude-global
       test-path: tests
+  context-sync:
+    uses: ./.github/workflows/test-py.yml
+    with:
+      working-directory: context-sync
+      test-path: tests
   scripts:
     uses: ./.github/workflows/test-py.yml
     with:
