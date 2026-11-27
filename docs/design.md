@@ -195,7 +195,7 @@ by a live test. Items marked [test] need an empirical check before we rely on th
    environments (needs the trust dialog, which cloud does not show). Plugins
    enabled only in repo settings are therefore not expected to load there. The
    documented route is plugins synced from the owner's claude.ai account.
-3. **Routines: undocumented.** The docs say a run clones the selected repos and
+3. **Routines: undocumented, but see T1 (committed rules and hooks work).** The docs say a run clones the selected repos and
    starts in auto mode; they do not say whether plugins, skills, hooks,
    `.claude/settings.json` or `CLAUDE.md` load. Cloud-session rules suggest
    `CLAUDE.md`, `.claude/agents`, committed `.claude/settings.json` (project
@@ -226,7 +226,14 @@ Routines. Use the fallback below as the primary mechanism:
   the review agent), installed per machine. It is never a dependency.
 
 **Tests to run before building (P2 step 7)**
-- T1: in a throwaway private repo, commit a `PreToolUse` deny hook and a
+- T1: **PASSED 2026-11-27.** A Routine on a throwaway private repo saw the
+  committed `CLAUDE.md` rule in context, and a committed `.claude/settings.json`
+  `PreToolUse` hook (python script) blocked a matching Bash call while a
+  non-matching call ran. Repo-provided skills/plugins: none listed. So committed
+  rules and hooks work in Routines. Notes: a Routine run needs an environment
+  without a repo-specific setup script; the claude.ai UI attaches ALL account
+  connectors to a new task by default (IBKR included), so clear them via API
+  (`clear_mcp_connections`). Original test text: in a throwaway private repo, commit a `PreToolUse` deny hook and a
   `CLAUDE.md` rule; run a Routine on it; confirm the rule is in context and the
   hook blocks. (Creates a test Routine: needs the owner's yes.)
 - T2: same repo in a cloud session with a repo-declared marketplace: confirm
