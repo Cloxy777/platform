@@ -8,6 +8,8 @@ dated heading named after the tag.
 
 ## Unreleased
 
+- Add `context-sync/sync.py` and the reusable workflow `check-context-sync.yml`: read-only `context/` mirror of life-context with a pinned commit and hash manifest (v* stream).
+- Add `telegram-kit/status-domain` (validateStatus, summarize, createStatusDomain): linted status-only domain Worker for health, sport and car (telegram-kit stream).
 - Add CHANGELOG and a CI check that released paths come with a changelog line.
 
 ## telegram-kit-v0.2.0 - 2026-11-27 (stream `telegram-kit-v*`)

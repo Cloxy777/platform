@@ -103,3 +103,26 @@ else is advisory text. Merge consent stays a rule, not a hook, so Routine 2's
 own squash-merge keeps working. Verified 2026-11-27 in a Routine on `ua-carry-trade` (pilot, v0.2.0): the
 shipped command with `$CLAUDE_PROJECT_DIR` ran, blocked `echo $<SECRET_VAR>`,
 allowed a harmless command, and the generated rule was in context.
+
+## D14 - life-context reaches cloud sessions as a pinned read-only mirror (2026-11-27)
+
+Cloud sessions check out one repo, so `../life-context/...` reads fail there. Options
+were a mirror, merging the four repos, or submodules; the owner chose the mirror.
+`context-sync/sync.py` copies the needed files into `context/` of each consumer with a
+banner, a pinned source commit and a hash manifest; `check-context-sync.yml` fails on
+hand edits. Upstream freshness is checked locally (`--check --source`), because CI
+cannot read the private life-context repo. Canonical edits and the cross-repo write
+rules stay in life-context (local sessions only). Cloud sessions treat `context/` as
+read-only and never write restrictions.
+
+## D15 - Health, sport and car domains are status-only (2026-11-27)
+
+Their records are free-form markdown, so parsing them is fragile and, for health,
+would read sensitive text. Each repo keeps a tiny hand-maintained `status.json`
+(`counters` and `due` dates, nothing else) that Claude updates whenever it updates the
+record. `telegram-kit/status-domain` lints it (label charset, integer counters, ISO
+dates, no other keys, lint messages never echo values) and serves the contract handlers
+from it, so the same code runs privacy `minimal` (health) and normal domains. Each
+repo's CI lints its own `status.json`. Staleness shows as `status age days` and a
+`status: stale` line.
+

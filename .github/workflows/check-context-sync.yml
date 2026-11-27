@@ -1,0 +1,38 @@
+name: check-context-sync
+
+# Reusable workflow. Fails when the calling repo's context/ mirror of life-context
+# was edited by hand or is not listed in context/MANIFEST.json. It cannot see the
+# private life-context repo, so staleness against upstream is checked locally with
+#   python context-sync/sync.py --check --source ../life-context .
+#   jobs:
+#     context-sync:
+#       uses: Cloxy777/platform/.github/workflows/check-context-sync.yml@v0.3.0
+#       with:
+#         platform-ref: v0.3.0
+on:
+  workflow_call:
+    inputs:
+      platform-ref:
+        description: "Platform tag providing context-sync/sync.py, e.g. v0.3.0"
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Cloxy777/platform
+          ref: ${{ inputs.platform-ref }}
+          path: .platform-src
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check the context mirror is untouched
+        run: python .platform-src/context-sync/sync.py --check .
