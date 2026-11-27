@@ -36,9 +36,11 @@ here.
 
 ### P2 - the original goal: global vs local Claude assets (design section 3)
 
-6. Verify the current plugin/marketplace manifest schema and whether Routines
-   and cloud sessions can load plugins (answers the 3.3 fallback question).
-7. Build `claude-plugin/` with the global rules (GitHub workflow, secrets,
+6. DONE (docs read 2026-11-27, live tests T1-T4 pending): plugin schema and
+   Routine/cloud support verified in design 3.3. Result: plugins cannot ship
+   always-on rules and repo-declared marketplaces do not load in cloud, so
+   the generated-files fallback becomes the primary mechanism.
+7. Run tests T1-T4 (design 3.3), then build the global rules source (`rules/`, `hooks/`, sync workflow; was `claude-plugin/`) with the rules (GitHub workflow, secrets,
    no-broker-orders, cite-sources) and the worktree/dep-install hooks; add
    enforcement hooks plus tests for the must-never rules.
 8. Enable it in one pilot repo (carry), confirm a fresh session shows the rules,
