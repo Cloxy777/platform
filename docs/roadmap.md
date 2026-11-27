@@ -36,14 +36,14 @@ here.
 
 ### P2 - the original goal: global vs local Claude assets (design section 3)
 
-6. DONE (docs read 2026-11-27, live tests T1-T4 pending): plugin schema and
+6. DONE (docs read 2026-11-27, live tests T1 and T3 passed): plugin schema and
    Routine/cloud support verified in design 3.3. Result: plugins cannot ship
    always-on rules and repo-declared marketplaces do not load in cloud, so
    the generated-files fallback becomes the primary mechanism.
-7. Run tests T1-T4 (design 3.3), then build the global rules source (`rules/`, `hooks/`, sync workflow; was `claude-plugin/`) with the rules (GitHub workflow, secrets,
-   no-broker-orders, cite-sources) and the worktree/dep-install hooks; add
-   enforcement hooks plus tests for the must-never rules.
-8. Enable it in one pilot repo (carry), confirm a fresh session shows the rules,
+7. DONE in PR (T1, T3 passed; T2, T4 skipped as moot): `claude-global/` with
+   rules, guard hook, settings fragment, `sync.py`, 49 tests, and
+   `check-claude-sync.yml` (architecture 3.4, decisions D13). Not tagged yet.
+8. Tag a release, run sync in one pilot repo (carry), confirm a fresh session shows the rules,
    then roll out to the rest. Slim each repo's `CLAUDE.md` to domain-only.
 
 ### P3 - the original goal: flexible bots and integrations (design section 2, 4)

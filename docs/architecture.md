@@ -45,7 +45,10 @@ workflows and public git dependencies need no credentials).
   test-py.yml        reusable: pytest
   test-node.yml      reusable: npm ci + npm test
   deploy-worker.yml  reusable: wrangler deploy
-  ci.yml             this repo's own CI (calls the three above via ./)
+  check-claude-sync.yml  reusable: fail if a consumer's generated Claude files drift
+  ci.yml             this repo's own CI (calls the reusable ones via ./)
+claude-global/           global Claude assets (rules, guard hook, settings fragment)
+                         and sync.py that renders them into a consumer repo (3.4)
 packages/telegram-kit/   JS, zero dependencies (Cloudflare Workers / Node 22+)
 py/platform_notify/      Python, stdlib only (3.9+)
 docs/                    this documentation
@@ -104,6 +107,27 @@ Returns `False` (prints a note) when either is unset, `True` when sent, raises
 timeout=15, opener=urlopen)` returns the bot's `result` dict. **Error messages
 never contain the token** (HTTP errors give only the code; other exceptions are
 redacted). `opener` is injectable for tests.
+
+### 3.4 `claude-global` (not tagged yet; first use is the carry pilot)
+
+Single source of the global Claude layer (design.md section 3, decisions D13):
+- `rules/*.md`: github-workflow, secrets, no-broker-orders, cite-sources.
+- `hooks/platform-guard.py`: PreToolUse guard that denies broker order tools
+  (MCP tool names like `create_order_instruction`, `cancel_order`; read tools are
+  untouched), secret-printing shell commands, and risky `gh`/`git` commands
+  (repo delete, visibility change, auto/admin merge, force-push, `--no-verify`).
+  Plain `gh pr merge --squash` stays allowed: Routine 2 merges its own PRs, and
+  the owner's yes for merges is a rule, not a hook.
+- `settings.fragment.json`: the hook wiring.
+- `sync.py <repo> --tag <tag> [--check]`: writes `.claude/rules/platform-*.md`,
+  `.claude/hooks/platform-guard.py`, merges the hook entry into
+  `.claude/settings.json` (consumer's own settings and hooks are preserved), and
+  maintains a marked block of `@.claude/rules/platform-*.md` imports in the
+  consumer's `CLAUDE.md`. Files named `platform-*` are owned by the script.
+- `check-claude-sync.yml` (reusable) runs `sync.py --check` in the consumer's CI.
+
+Consumer flow: run sync with the release tag, commit, PR. Bump = re-run with the
+new tag. The consumer `CLAUDE.md` keeps only domain rules above the block.
 
 ## 4. How consumers use it
 

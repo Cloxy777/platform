@@ -1,0 +1,38 @@
+name: check-claude-sync
+
+# Reusable workflow. Fails when the calling repo's generated platform files
+# (.claude/rules/platform-*, .claude/hooks/platform-*, the platform hook entry in
+# .claude/settings.json, the CLAUDE.md import block) differ from what the given
+# platform tag would produce.
+#   jobs:
+#     claude-sync:
+#       uses: Cloxy777/platform/.github/workflows/check-claude-sync.yml@v0.2.0
+#       with:
+#         platform-ref: v0.2.0
+on:
+  workflow_call:
+    inputs:
+      platform-ref:
+        description: "Platform tag the assets must match, e.g. v0.2.0"
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Cloxy777/platform
+          ref: ${{ inputs.platform-ref }}
+          path: .platform-src
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check generated files are current
+        run: python .platform-src/claude-global/sync.py . --tag "${{ inputs.platform-ref }}" --check --source .platform-src/claude-global

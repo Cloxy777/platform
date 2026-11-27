@@ -143,7 +143,7 @@ low. The existing booking Worker already uses one `*/5` cron.
 
 ### 3.2 Recommended structure
 
-`platform/claude-plugin/` (public, no data) holds the **global** layer:
+`platform/claude-global/` (public, no data; built, see architecture 3.4 and D13) holds the **global** layer. It is rendered into repos by `sync.py` instead of being a plugin (3.3). Original sketch:
 - `rules/` (markdown): `github-workflow.md` (branches `claude/*`, PRs, merge only
   on the owner's yes, direct squash merge, commit/PR trailers, no auto-merge),
   `secrets.md`, `cite-sources-never-invent.md`, `no-broker-orders.md`,

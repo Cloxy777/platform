@@ -87,3 +87,19 @@ The booking Worker's automatic dispatch of new bookings was suspended on
 2026-10-23 by the owner (commit 4d6d4ce in `automation-framework`). Do not
 re-enable without the owner's explicit request; reminders, auto-cancel and the
 digest keep running.
+
+## D13 - Global Claude assets ship as generated repo files, not a plugin (2026-11-27)
+
+Docs check plus live Routine tests (design.md 3.3): a plugin cannot carry
+always-on rules, repo-declared marketplaces are not loaded in cloud sessions,
+while committed `CLAUDE.md` `@` imports, `.claude/rules` and a committed
+`PreToolUse` hook all work in Routines. So `claude-global/sync.py` renders rules,
+the guard hook and the hook wiring into each consumer as committed files, pinned
+by a platform tag and checked by `check-claude-sync.yml`. This supersedes the
+"plugin or import" wording in D10. A plugin remains optional for local use.
+Consequences: global edits reach a repo only through a sync PR (that is the
+review point); the guard hook enforces only the must-never rules, everything
+else is advisory text. Merge consent stays a rule, not a hook, so Routine 2's
+own squash-merge keeps working. Hook execution in Routines is verified for a
+relative command path; the shipped command uses `$CLAUDE_PROJECT_DIR`, to be
+confirmed in the carry pilot.
