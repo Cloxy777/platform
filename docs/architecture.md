@@ -97,7 +97,7 @@ ES module, no dependencies, uses only Web APIs (`fetch`, `crypto.subtle`,
 yet** (they exist for the future confirm-before-execute callback flow, see
 design.md).
 
-### 3.3 `py/platform_notify` (tag `py-v0.1.0`)
+### 3.3 `py/platform_notify` (tags `py-v0.1.0`; `py-v0.2.0` adds `send_document` and the CLI)
 
 Stdlib only. `send_message(text, *, token=None, chat_id=None, parse_mode=None,
 reply_markup=None, timeout=15, opener=urlopen) -> bool`. Reads
@@ -107,6 +107,17 @@ Returns `False` (prints a note) when either is unset, `True` when sent, raises
 timeout=15, opener=urlopen)` returns the bot's `result` dict. **Error messages
 never contain the token** (HTTP errors give only the code; other exceptions are
 redacted). `opener` is injectable for tests.
+
+From `py-v0.2.0`: `send_document(path, *, caption=None, token=None,
+chat_id=None, parse_mode=None, timeout=30, opener=urlopen) -> bool` (multipart,
+same skip/raise rules), and a CLI so Routines and slash commands need no curl:
+
+```
+python -m platform_notify message --text "..." [--parse-mode Markdown]   # or --text - (stdin) / --text-file F
+python -m platform_notify document event.ics [--caption "..."]
+python -m platform_notify get-me
+```
+Exit codes: 0 sent or skipped (unset secrets), 1 Telegram failure, 2 usage.
 
 ### 3.4 `claude-global` (not tagged yet; first use is the carry pilot)
 
