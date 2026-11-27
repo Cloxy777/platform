@@ -62,9 +62,9 @@ here.
 
 ### P4 - later / optional
 
-15. Remote MCP server on a Worker (only if a concrete need appears).
-16. Publish the JS kit to npm if more JS consumers appear (decision D2).
-17. Normalise dormant repos (`trading-framework`, `career-hub`).
+15. NOT STARTED, no concrete need: remote MCP server on a Worker. Revisit if a Routine or session needs a tool that a domain Worker already exposes.
+16. NOT STARTED, trigger not met: npm publish of the JS kit (D2). Every JS consumer (carry, invest, template-domain, life-gateway, three status domains) vendors one file with a header test; revisit if re-copying becomes painful or a consumer outside these repos appears.
+17. DONE in PRs (trading-framework #49, career-hub #8): `claude-global` v0.2.0 synced and `claude-sync` CI added. Remaining dormant: `game-scripts`.
 
 ## Risks to watch
 
