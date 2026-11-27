@@ -36,6 +36,10 @@ Consume by tag, e.g. `github:Cloxy777/platform#telegram-kit-v0.1.0` (JS) or
 
 `packages/worker-kit`, `claude-plugin/`.
 
+## Documentation
+
+Start at [docs/architecture.md](docs/architecture.md). Also: [decisions](docs/decisions.md), [operations](docs/operations.md), [design (not built yet)](docs/design.md), [roadmap](docs/roadmap.md). Claude Code reads [CLAUDE.md](CLAUDE.md).
+
 ## Rules
 
 - No personal data, ids, tokens or chat ids in this repo. Ever.
